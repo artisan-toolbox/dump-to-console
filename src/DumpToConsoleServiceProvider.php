@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace ArtisanToolbox\DumpToConsole;
 
-use ArtisanToolbox\DumpToConsole\Console\Commands\DumpToConsoleCommand;
+use ArtisanToolbox\DumpToConsole\Console\Commands\DumpListenCommand;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Foundation\DevCommands;
+use Illuminate\Support\Benchmark;
 use Illuminate\Support\ServiceProvider;
 
 class DumpToConsoleServiceProvider extends ServiceProvider
@@ -16,6 +20,12 @@ class DumpToConsoleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/dump-to-console.php', 'dump-to-console');
 
+        $this->app->singleton(DumpClient::class, function (Application $app): DumpClient {
+            $host = $app->make(Repository::class)->get('dump-to-console.host');
+
+            return new DumpClient(is_string($host) && $host !== '' ? $host : DumpClient::DEFAULT_HOST);
+        });
+
         $this->app->singleton(DumpToConsole::class);
     }
 
@@ -24,11 +34,9 @@ class DumpToConsoleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__.'/../routes/dump-to-console.php');
-
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'dump-to-console');
-
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'dump-to-console');
+        Benchmark::macro('dc', function (callable $callback): mixed {
+            return app(DumpToConsole::class)->benchmark($callback);
+        });
 
         if (! $this->app->runningInConsole()) {
             return;
@@ -38,24 +46,17 @@ class DumpToConsoleServiceProvider extends ServiceProvider
             __DIR__.'/../config/dump-to-console.php' => config_path('dump-to-console.php'),
         ], ['dump-to-console', 'dump-to-console-config']);
 
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/dump-to-console'),
-        ], ['dump-to-console', 'dump-to-console-views']);
-
-        $this->publishes([
-            __DIR__.'/../lang' => $this->app->langPath('vendor/dump-to-console'),
-        ], ['dump-to-console', 'dump-to-console-lang']);
-
-        $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/dump-to-console'),
-        ], ['dump-to-console', 'dump-to-console-assets']);
-
-        $this->publishesMigrations([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], ['dump-to-console', 'dump-to-console-migrations']);
-
         $this->commands([
-            DumpToConsoleCommand::class,
+            DumpListenCommand::class,
         ]);
+
+        if (class_exists(DevCommands::class) && $this->registerDevCommand()) {
+            DevCommands::artisan('dump:listen', 'dumps');
+        }
+    }
+
+    private function registerDevCommand(): bool
+    {
+        return $this->app->make(Repository::class)->get('dump-to-console.register_dev_command', true) === true;
     }
 }

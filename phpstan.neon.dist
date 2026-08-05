@@ -5,4 +5,5 @@ parameters:
         - config
         - database
         - routes
+        - tests/Fixtures/DumpableValue.php
     tmpDir: build/phpstan

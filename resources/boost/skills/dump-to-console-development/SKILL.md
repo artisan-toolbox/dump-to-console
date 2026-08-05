@@ -1,7 +1,7 @@
 ---
 name: dump-to-console-development
 description: >
-  Configure and apply the Artisan Toolbox Dump To Console package in Laravel applications.
+  Use Artisan Toolbox Dump To Console to inspect Laravel values without stopping execution or changing application output.
 license: MIT
 metadata:
   author: Allan Mariucci Carvalho
@@ -9,33 +9,43 @@ metadata:
 
 # Artisan Toolbox Dump To Console
 
-Use this skill when a Laravel application needs to integrate the Artisan Toolbox Dump To Console package.
+Use this skill when temporary debug values must appear in a local console while HTTP responses, streams, downloads, jobs, or command output remain intact.
 
 ## Primary Goal
 
-- apply the `artisan-toolbox/dump-to-console` package's public API in the smallest correct way
+Send short-lived development dumps to the package listener with the smallest useful probe and remove probes when the investigation is complete.
 
 ## Workflow
 
-### 1. Inspect the Laravel app context
+1. Install `artisan-toolbox/dump-to-console` with Composer.
+2. Start `php artisan dump:listen`, or use the package's `dumps` process through `php artisan dev` when supported.
+3. Call `dc($value)` at the application location being inspected. Use named arguments when several values need meaningful labels.
+4. Use `Benchmark::dc(fn () => ...)` when both a result and its duration are useful.
+5. Add `ArtisanToolbox\DumpToConsole\Concerns\Dumpable` to an application class only when fluent `$object->dc()` calls improve its development workflow.
+6. Publish `dump-to-console-config` only when changing the host or disabling `artisan dev` integration.
 
-- confirm the app is a Laravel project
-- inspect the target code paths where the package should be applied
+## References
 
-### 2. Apply the package's public API
-
-Document how to integrate Artisan Toolbox Dump To Console here, replacing this placeholder with the integration steps for your package.
-
-## Rules, References, and Templates
-
-Read before executing:
-
-- no additional resource files for this skill
+- `config/dump-to-console.php`
+- `README.md`
 
 ## Examples
 
-- describe a representative integration scenario for Artisan Toolbox Dump To Console
+```php
+$order = dc(Order::findOrFail($id));
+
+dc(request: request()->all(), order: $order);
+```
+
+```php
+use Illuminate\Support\Benchmark;
+
+$report = Benchmark::dc(fn () => $service->generateReport());
+```
 
 ## Anti-patterns
 
-- do not document package internals here; keep the skill focused on adoption in Laravel apps
+- Do not expose the TCP listener on an untrusted interface; its protocol has no authentication or encryption.
+- Do not treat best-effort dumps as persistent logs or application control flow.
+- Do not use dumps for secrets or values that should not appear in a developer terminal.
+- Do not publish configuration when the local defaults are sufficient.
