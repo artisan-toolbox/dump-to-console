@@ -58,7 +58,10 @@ it('sends a marker when no values are provided', function () {
 });
 
 it('resolves compiled blade dumps to the original view', function () {
-    config()->set('view.compiled', dirname(__DIR__).'/Fixtures');
+    $compiledViewPath = dirname(__DIR__).DIRECTORY_SEPARATOR.'Fixtures';
+    $alternateSeparator = DIRECTORY_SEPARATOR === '/' ? '\\' : '/';
+
+    config()->set('view.compiled', str_replace(DIRECTORY_SEPARATOR, $alternateSeparator, $compiledViewPath));
     $this->app->forgetInstance(DumpToConsole::class);
 
     $result = require dirname(__DIR__).'/Fixtures/compiled-view.php';

@@ -156,8 +156,13 @@ class DumpToConsole
     {
         return is_string($this->compiledViewPath)
             && $this->compiledViewPath !== ''
-            && str_starts_with($file, $this->compiledViewPath)
+            && str_starts_with($this->normalizePath($file), $this->normalizePath($this->compiledViewPath))
             && str_ends_with($file, '.php');
+    }
+
+    private function normalizePath(string $path): string
+    {
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
     private function originalCompiledViewFile(string $file): string
