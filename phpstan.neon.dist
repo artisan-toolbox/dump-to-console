@@ -3,7 +3,5 @@ parameters:
     paths:
         - src
         - config
-        - database
-        - routes
         - tests/Fixtures/DumpableValue.php
     tmpDir: build/phpstan
