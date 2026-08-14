@@ -38,6 +38,22 @@ class DumpToConsole
      */
     public function dump(mixed ...$values): mixed
     {
+        $this->send($values);
+
+        if ($values === []) {
+            return null;
+        }
+
+        return count($values) === 1 ? $values[array_key_first($values)] : $values;
+    }
+
+    /**
+     * Send the provided values to the dump listener.
+     *
+     * @param  array<array-key, mixed>  $values
+     */
+    private function send(array $values): void
+    {
         try {
             $context = $this->context();
 
@@ -55,12 +71,6 @@ class DumpToConsole
         } catch (Throwable) {
             // A development dump must never affect the application.
         }
-
-        if ($values === []) {
-            return null;
-        }
-
-        return count($values) === 1 ? $values[array_key_first($values)] : $values;
     }
 
     /**
@@ -75,10 +85,10 @@ class DumpToConsole
     {
         [$result, $duration] = Benchmark::value($callback);
 
-        $this->dump(
-            duration: number_format($duration, 3).'ms',
-            result: $result,
-        );
+        $this->send([
+            'duration' => number_format($duration, 3).'ms',
+            'result' => $result,
+        ]);
 
         return $result;
     }
