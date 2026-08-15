@@ -115,11 +115,7 @@ it('registers the listener command', function () {
     expect(Artisan::all())->toHaveKey('dump:listen');
 });
 
-it('registers the listener with the dev command when supported', function () {
-    if (! class_exists(DevCommands::class)) {
-        $this->markTestSkipped('This Laravel version does not expose DevCommands.');
-    }
-
+it('registers the listener with the dev command', function () {
     expect(collect(DevCommands::commands())->firstWhere('name', 'dumps')['command'])
         ->toBe('php artisan dump:listen');
 });

@@ -2,6 +2,7 @@
 
 ## [Unreleased](https://github.com/artisan-toolbox/dump-to-console/compare/v0.1.0...1.x)
 
+- Require PHP 8.5 or later, Laravel 13, and Pest 5.
 - Add the fault-tolerant `dc()` helper for labeled console dumps with source context.
 - Add the `dump:listen` TCP listener and optional Laravel `dev` command integration.
 - Add fluent dumps through the package's `Dumpable` trait.

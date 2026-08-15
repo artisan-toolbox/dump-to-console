@@ -50,7 +50,7 @@ class DumpToConsoleServiceProvider extends ServiceProvider
             DumpListenCommand::class,
         ]);
 
-        if (class_exists(DevCommands::class) && $this->registerDevCommand()) {
+        if ($this->registerDevCommand()) {
             DevCommands::artisan('dump:listen', 'dumps');
         }
     }

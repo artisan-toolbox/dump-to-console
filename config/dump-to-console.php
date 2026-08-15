@@ -22,9 +22,9 @@ return [
     | Laravel Development Command
     |--------------------------------------------------------------------------
     |
-    | Supported Laravel versions can start the listener alongside the other
-    | processes managed by "php artisan dev". The standalone command remains
-    | available when this integration is disabled.
+    | Laravel can start the listener alongside the other processes managed by
+    | "php artisan dev". The standalone command remains available when this
+    | integration is disabled.
     |
     */
     'register_dev_command' => true,
