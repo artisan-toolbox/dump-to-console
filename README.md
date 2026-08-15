@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://packagist.org/packages/artisan-toolbox/dump-to-console"><img src="https://img.shields.io/packagist/v/artisan-toolbox/dump-to-console.svg?style=flat-square" alt="Packagist"></a>
-    <a href="https://github.com/artisan-toolbox/dump-to-console/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=main&label=Tests&style=flat-square"></a>
+    <a href="https://github.com/artisan-toolbox/dump-to-console/actions"><img alt="GitHub Workflow Status (1.x)" src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&label=Tests&style=flat-square"></a>
 </p>
 
 Dump to Console sends Laravel dumps to a local console listener without stopping the application or changing its response, stream, download, or command output.
