@@ -2,39 +2,31 @@
 
 declare(strict_types=1);
 
-use ArtisanToolbox\DumpToConsole\Console\Commands\DumpListenCommand;
 use ArtisanToolbox\DumpToConsole\DumpServer;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 
 it('listens for and renders incoming dumps', function () {
     $server = new FakeDumpServer;
-    $command = new TestDumpListenCommand($server);
+    $requestedHosts = [];
 
-    app(Kernel::class)->registerCommand($command);
+    app()->bind(DumpServer::class, function (Application $_, array $parameters) use ($server, &$requestedHosts): DumpServer {
+        $requestedHosts[] = $parameters['host'];
 
-    expect(app(Kernel::class)->call('dump:listen'))->toBe(0)
-        ->and(app(Kernel::class)->output())
+        return $server;
+    });
+
+    expect(resolve(Kernel::class)->call('dump:listen'))->toBe(0)
+        ->and(resolve(Kernel::class)->output())
         ->toContain(
             'Listening for dumps on [tcp://127.0.0.1:9912].',
             '"Taylor"',
             'routes/web.php:10',
         )
-        ->and($server->calls)->toBe(['start', 'listen']);
+        ->and($server->calls)->toBe(['start', 'listen'])
+        ->and($requestedHosts)->toBe(['tcp://127.0.0.1:9912']);
 });
-
-class TestDumpListenCommand extends DumpListenCommand
-{
-    public function __construct(private readonly DumpServer $dumpServer)
-    {
-        parent::__construct();
-    }
-
-    protected function server(): DumpServer
-    {
-        return $this->dumpServer;
-    }
-}
 
 class FakeDumpServer extends DumpServer
 {

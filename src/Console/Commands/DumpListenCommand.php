@@ -8,16 +8,16 @@ use ArtisanToolbox\DumpToConsole\Console\CliDumper;
 use ArtisanToolbox\DumpToConsole\DumpClient;
 use ArtisanToolbox\DumpToConsole\DumpRenderer;
 use ArtisanToolbox\DumpToConsole\DumpServer;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository;
 use Symfony\Component\VarDumper\Cloner\Data;
 
+#[Description('Listen for application dumps')]
+#[Signature('dump:listen {--host= : Override the configured TCP listener host}')]
 class DumpListenCommand extends Command
 {
-    protected $signature = 'dump:listen {--host= : Override the configured TCP listener host}';
-
-    protected $description = 'Listen for application dumps';
-
     public function handle(): int
     {
         $server = $this->server();
@@ -38,7 +38,9 @@ class DumpListenCommand extends Command
     {
         $host = $this->option('host');
 
-        return new DumpServer(is_string($host) && $host !== '' ? $host : $this->configuredHost());
+        return $this->laravel->make(DumpServer::class, [
+            'host' => is_string($host) && $host !== '' ? $host : $this->configuredHost(),
+        ]);
     }
 
     protected function renderer(): DumpRenderer

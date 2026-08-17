@@ -35,7 +35,7 @@ class DumpToConsoleServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Benchmark::macro('dc', function (callable $callback): mixed {
-            return app(DumpToConsole::class)->benchmark($callback);
+            return resolve(DumpToConsole::class)->benchmark($callback);
         });
 
         if (! $this->app->runningInConsole()) {

@@ -15,6 +15,6 @@ if (! function_exists('dc')) {
      */
     function dc(mixed ...$values): mixed
     {
-        return app(DumpToConsole::class)->dump(...$values);
+        return resolve(DumpToConsole::class)->dump(...$values);
     }
 }

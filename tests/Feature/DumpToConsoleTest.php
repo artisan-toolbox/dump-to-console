@@ -16,8 +16,8 @@ beforeEach(function () {
 });
 
 it('registers package services as singletons', function () {
-    expect(app(DumpClient::class))->toBe(app(DumpClient::class))
-        ->and(app(DumpToConsole::class))->toBe(app(DumpToConsole::class));
+    expect(resolve(DumpClient::class))->toBe(resolve(DumpClient::class))
+        ->and(resolve(DumpToConsole::class))->toBe(resolve(DumpToConsole::class));
 });
 
 it('merges the package configuration', function () {
