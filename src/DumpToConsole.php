@@ -14,6 +14,7 @@ use Throwable;
 
 class DumpToConsole implements Versionable
 {
+    public const string VERSION = '1.0.0';
     private readonly string $basePath;
 
     private readonly ?string $compiledViewPath;
