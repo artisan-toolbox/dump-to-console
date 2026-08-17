@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ArtisanToolbox\DumpToConsole;
 
+use ArtisanToolbox\Maintainer\Versionable\Contracts\Versionable;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Benchmark;
@@ -11,7 +12,7 @@ use RuntimeException;
 use Symfony\Component\VarDumper\Caster\ScalarStub;
 use Throwable;
 
-class DumpToConsole
+class DumpToConsole implements Versionable
 {
     private readonly string $basePath;
 
