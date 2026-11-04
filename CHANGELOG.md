@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.1.0] - 2026-11-04
+
+### Fixes
+
+- **Configure Larastan to include package config directory** (`8498d9b`)
+  Adjusted Larastan/PHPStan configuration so the analyzer recognizes the package’s `config/` directory. This improves static analysis accuracy for any configuration-dependent code paths and suppresses false positives/false negatives that occur when the analyzer cannot resolve config files. No runtime/public API behavior is changed, but it can affect developer experience and CI static analysis outcomes.
+
+- **Install maintainer as runtime dependency** (`cbd0340`)
+  Changed dependency configuration so `artisan-toolbox/maintainer` is installed under production `require` instead of only `require-dev`. This ensures consumers can use `dc()` without needing development dependencies. The practical impact is improved out-of-the-box usability for end users who install the package normally. Compatibility note: environments that previously did not install dev dependencies and relied on `dc()` not being available at runtime will now see it available; conversely, increasing production dependencies may affect install size/autoloading and could be considered a behavior/packaging change (potentially breaking for highly size-sensitive setups).
+
+### Code Style
+
+- **Bump shivammathur/setup-php from 2.37.2 to 2.40.0** (`007a0de`)
+  Updated the pinned version of the GitHub Action `shivammathur/setup-php` from 2.37.2 to 2.40.0. This is a CI/tooling version bump that helps ensure consistent PHP installation during workflow runs. User impact is limited to CI behavior and tooling reliability; no runtime or public API changes are intended.
+
+- **Remove extra blank line in DumpToConsole** (`ef1d521`)
+  Performed a formatting-only cleanup by removing an extra blank line in `DumpToConsole`. This is intended to keep code style consistent and does not change functionality, logic, or public APIs.
+
+### Maintenance
+
+- **Merge origin/1.x into 1.x** (`2f1b526`)
+  Merged the remote-tracking branch "origin/1.x" into the local 1.x branch. This is an integration-only change that brings in whatever commits were present on the remote, potentially including fixes or configuration updates needed for the 1.x line. User-facing impact depends on what was contained in the merged branch; no behavior is explicitly described beyond the branch merge.
+
+- **Bump CI setup-php action to shivammathur/setup-php v2.40.0** (`75f8cc2`)
+  Merged a pull request that updates the GitHub Actions `shivammathur/setup-php` usage to version 2.40.0 (still within the v2 major line). This ensures CI installs the intended PHP tooling with the updated action commit/pinning and improves compatibility with the action’s latest fixes. Indirectly, the workflow adds a Windows-only Composer step to require a compatible PHPStan version (>=2.2.8 <3.0) to include the "Turbo PHPDoc fix" for Windows; this can indirectly change dev/static-analysis dependencies in CI, affecting test/static-analysis dependency resolution but not runtime/public APIs.
+
+- **Remove update-changelog GitHub Actions workflow** (`13acbde`)
+  Deleted the GitHub Actions workflow `.github/workflows/update-changelog.yml`, which previously ran on `release` events (type `released`) to update `CHANGELOG.md` and automatically commit it back to `main` using `stefanzweifel/changelog-updater-action` and `stefanzweifel/git-auto-commit-action`. After this removal, future published releases will no longer automatically update and commit changelog content. User impact is on project maintenance/visibility rather than runtime behavior; consumers are not directly affected, but maintainers must update the changelog through other means.
+
 ## Unreleased
 
 ### Fixes
