@@ -20,7 +20,7 @@ class DumpToConsoleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/dump-to-console.php', 'dump-to-console');
 
-        $this->app->singleton(DumpClient::class, function (Application $app): DumpClient {
+        $this->app->singleton(function (Application $app): DumpClient {
             $host = $app->make(Repository::class)->get('dump-to-console.host');
 
             return new DumpClient(is_string($host) && $host !== '' ? $host : DumpClient::DEFAULT_HOST);

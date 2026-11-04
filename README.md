@@ -5,9 +5,11 @@
 </div>
 
 <p id="maintainer-badges" align="center">
-<a href="https://github.com/artisan-toolbox/dump-to-console/releases"><img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="version"></a>
-<a href="https://packagist.org/packages/artisan-toolbox/dump-to-console"><img src="https://img.shields.io/packagist/v/artisan-toolbox/dump-to-console.svg?style=flat-square" alt="Packagist"></a>
-<a href="https://github.com/artisan-toolbox/dump-to-console/actions"><img src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&amp;label=Tests&amp;style=flat-square" alt="Tests"></a>
+<a href="https://github.com/artisan-toolbox/dump-to-console/releases"><img src="https://img.shields.io/github/v/release/artisan-toolbox/dump-to-console?label=Release&amp;style=flat-square" alt="Release"></a>
+<a href="https://artisantoolbox.wsssoftware.com.br/packages/dump-to-console/#requirements"><img src="https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square" alt="PHP"></a>
+<a href="https://artisantoolbox.wsssoftware.com.br/packages/dump-to-console/#requirements"><img src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square" alt="Laravel"></a>
+<a href="https://github.com/artisan-toolbox/dump-to-console/actions/workflows/tests.yml?query=branch%3A1.x"><img src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&amp;label=Tests&amp;style=flat-square" alt="Tests"></a>
+<a href="https://artisantoolbox.wsssoftware.com.br/packages/dump-to-console/"><img src="https://img.shields.io/badge/Docs-Read-blue?style=flat-square" alt="Docs"></a>
 </p>
 
 <p id="maintainer-description" align="center">

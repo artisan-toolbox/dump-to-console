@@ -11,7 +11,7 @@ it('listens for and renders incoming dumps', function () {
     $server = new FakeDumpServer;
     $requestedHosts = [];
 
-    app()->bind(DumpServer::class, function (Application $_, array $parameters) use ($server, &$requestedHosts): DumpServer {
+    app()->bind(function (Application $_, array $parameters) use ($server, &$requestedHosts): DumpServer {
         $requestedHosts[] = $parameters['host'];
 
         return $server;

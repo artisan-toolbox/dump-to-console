@@ -4,10 +4,12 @@
 
 ### Fixes
 
+- Configure Larastan to recognize the package's `config/` directory during static analysis.
 - Install Maintainer as a runtime dependency so consumers can call `dc()` without installing development dependencies.
 
 ### Documentation
 
+- Standardize README badges for release status, compatibility, CI, and documentation.
 - Add the Dump to Console logo and manage the README header with Maintainer.
 
 ## [1.0.0] - 2026-08-17

@@ -44,6 +44,10 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Require a PHPStan version with the Turbo PHPDoc fix on Windows
+        if: runner.os == 'Windows'
+        run: composer require --dev "phpstan/phpstan:>=2.2.8 <3.0" --no-interaction --no-update
+
       - name: Install dependencies
         run: |
           composer require "artisan-toolbox/core:1.x-dev" "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
