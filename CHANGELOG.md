@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Fixes
+
+- Install Maintainer as a runtime dependency so consumers can call `dc()` without installing development dependencies.
+
+### Documentation
+
+- Add the Dump to Console logo and manage the README header with Maintainer.
+
 ## [1.0.0] - 2026-08-17
 
 ### Features

@@ -1,13 +1,19 @@
-<div align="center">
-    <h1>Artisan Toolbox Dump To Console</h1>
+<!-- MAINTAINER:README_HEAD:START -->
+<div id="maintainer-title" align="center">
+    <img src="logo/dump-to-console-icon.svg" alt="" width="88">
+    <h1>Dump to Console</h1>
 </div>
 
-<p align="center">
-    <a href="https://packagist.org/packages/artisan-toolbox/dump-to-console"><img src="https://img.shields.io/packagist/v/artisan-toolbox/dump-to-console.svg?style=flat-square" alt="Packagist"></a>
-    <a href="https://github.com/artisan-toolbox/dump-to-console/actions"><img alt="GitHub Workflow Status (1.x)" src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&label=Tests&style=flat-square"></a>
+<p id="maintainer-badges" align="center">
+<a href="https://github.com/artisan-toolbox/dump-to-console/releases"><img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="version"></a>
+<a href="https://packagist.org/packages/artisan-toolbox/dump-to-console"><img src="https://img.shields.io/packagist/v/artisan-toolbox/dump-to-console.svg?style=flat-square" alt="Packagist"></a>
+<a href="https://github.com/artisan-toolbox/dump-to-console/actions"><img src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&amp;label=Tests&amp;style=flat-square" alt="Tests"></a>
 </p>
 
-Dump to Console sends Laravel dumps to a local console listener without interrupting the application response, stream, download, or command output.
+<p id="maintainer-description" align="center">
+    Send Laravel dumps to a local console listener without interrupting the application.
+</p>
+<!-- MAINTAINER:README_HEAD:END -->
 
 ## Documentation
 
@@ -18,6 +24,8 @@ The complete usage, configuration, security, and architecture documentation is a
 ```bash
 composer require artisan-toolbox/dump-to-console
 ```
+
+Requires PHP 8.5 and Laravel 13.
 
 Start the listener and send it a value:
 

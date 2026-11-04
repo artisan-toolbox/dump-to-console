@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Dump to Console icon</title>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#20252B"/>
+  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="13.25" fill="none" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="1.5"/>
+  <rect x="11" y="15" width="42" height="34" rx="6" fill="#FFF7EF"/>
+  <rect x="14" y="23" width="36" height="23" rx="3" fill="#20252B"/>
+  <path d="m20 29 6 5.5-6 5.5" fill="none" stroke="#FF5947" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 40h10" stroke="#FF9A86" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="17.5" cy="19" r="1.25" fill="#20252B"/>
+  <circle cx="22" cy="19" r="1.25" fill="#20252B"/>
+  <circle cx="26.5" cy="19" r="1.25" fill="#20252B"/>
+</svg>
