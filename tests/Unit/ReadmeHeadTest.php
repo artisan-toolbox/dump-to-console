@@ -16,10 +16,10 @@ it('configures the package logo and badges for the managed README header', funct
             $badge->imgAlt(), $badge->link(), $badge->imgSrc(),
         ], $head->badges()))->toBe([
             ['Release', 'https://github.com/artisan-toolbox/dump-to-console/releases', 'https://img.shields.io/github/v/release/artisan-toolbox/dump-to-console?label=Release&style=flat-square'],
-            ['PHP', 'https://artisantoolbox.wsssoftware.com.br/packages/dump-to-console/#requirements', 'https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square'],
-            ['Laravel', 'https://artisantoolbox.wsssoftware.com.br/packages/dump-to-console/#requirements', 'https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square'],
+            ['PHP', 'https://atb.dev.br/packages/dump-to-console/#requirements', 'https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square'],
+            ['Laravel', 'https://atb.dev.br/packages/dump-to-console/#requirements', 'https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square'],
             ['Tests', 'https://github.com/artisan-toolbox/dump-to-console/actions/workflows/tests.yml?query=branch%3A1.x', 'https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&label=Tests&style=flat-square'],
-            ['Docs', 'https://artisantoolbox.wsssoftware.com.br/packages/dump-to-console/', 'https://img.shields.io/badge/Docs-Read-blue?style=flat-square'],
+            ['Docs', 'https://atb.dev.br/packages/dump-to-console/', 'https://img.shields.io/badge/Docs-Read-blue?style=flat-square'],
         ]);
     expect(DumpToConsole::VERSION)->toBe(DumpToConsolePackage::VERSION);
 });

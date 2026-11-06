@@ -12,13 +12,13 @@
     "authors": [
         {
             "name": "Allan Mariucci Carvalho",
-            "email": "allan@wss.group",
+            "email": "contact@atb.dev.br",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.5",
-        "artisan-toolbox/maintainer": "^1.10.0",
+        "artisan-toolbox/maintainer": "^1.11.0",
         "illuminate/support": "^13.0",
         "artisan-toolbox/core": "^1.0"
     },
