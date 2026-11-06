@@ -5,7 +5,7 @@
 ### Documentation
 
 - **Update documentation links and security contact email** (`7a90155`)
-  Updates the project’s security vulnerability reporting contact email in `.github/SECURITY.md` from `allan@wss.group` to `contact@atb.dev.br`, so security reports are routed to the correct inbox. Additionally, documentation-related link targets/badge URLs are updated to use the new `https://atb.dev.br` domain (including documentation/README badge URLs). Finally, package metadata and tests are aligned with these documentation-only URL changes (composer author email is updated; test expectations for README header badge URLs are updated). User impact is limited to where security and documentation links direct users; no runtime/package behavior changes are introduced, though users relying on the old `artisantoolbox.wsssoftware.com.br` domain may need the new links if the old domain is no longer available.
+  Updates the project’s security vulnerability reporting contact email in `.github/SECURITY.md` to `contact@atb.dev.br`, so security reports are routed to the correct inbox. Additionally, documentation-related link targets/badge URLs are updated to use the new `https://atb.dev.br` domain (including documentation/README badge URLs). Finally, package metadata and tests are aligned with these documentation-only URL changes (composer author email is updated; test expectations for README header badge URLs are updated). User impact is limited to where security and documentation links direct users; no runtime/package behavior changes are introduced, though users relying on the previous documentation domain may need the new links if the old domain is no longer available.
 
 ## [Unreleased]
 
