@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0] - 2026-11-18
+
+### Documentation
+
+- **Update boost dump-to-console skill documentation and references** (`90d2de1`)
+  Reworded and refreshed the documentation for the `dump-to-console-development` (Boost) skill setup, including updated references and setup guidance. This change clarifies/aligns the environment and composer installation expectations (PHP 8.5 / Laravel 13, and the `composer require artisan-toolbox/dump-to-console` command), replaces the previous “References” section with targeted external documentation links for installation and listener/listener setup, and updates PHP example snippets to match the current recommended usage patterns (including different `dc()` / `Benchmark::dc()` call styles such as named arguments and typed closures). It also adds an explicit behavioral note for readers: the listener receives selected values plus timing, and the included sample calls return `42`, a summary array, and `60` in the application. Impact: no runtime behavior is changed; however, documentation consumers who follow older setup steps or old reference links may need to update their docs/workflows accordingly.
+
+- **Clarify SECURITY contact and documentation badge domain impacts** (`ce73252`)
+  Clarified documentation-related security and domain impact notes. The release documentation was updated to reflect that the contact email in `.github/SECURITY.md` is `contact@atb.dev.br` (instead of the previous value) and that README/documentation badge URLs now use `https://atb.dev.br`. This matters for users/integrators who rely on the prior documentation domain or badge/link URLs in their own tooling, bookmarks, or documentation mirrors—those links may need to be updated to the new domain. Compatibility/migration: no application runtime behavior is affected, but any external consumers hardcoding the previous domain or email contact should update accordingly.
+
 ## [1.1.1] - 2026-11-06
 
 ### Documentation
