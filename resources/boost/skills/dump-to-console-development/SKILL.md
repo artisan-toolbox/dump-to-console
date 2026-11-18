@@ -17,7 +17,7 @@ Send short-lived development dumps to the package listener with the smallest use
 
 ## Workflow
 
-1. Install `artisan-toolbox/dump-to-console` with Composer.
+1. From a PHP 8.5 and Laravel 13 application, run `composer require artisan-toolbox/dump-to-console`.
 2. Start `php artisan dump:listen`, or use the package's `dumps` process through `php artisan dev` when supported.
 3. Call `dc($value)` at the application location being inspected. Use named arguments when several values need meaningful labels.
 4. Use `Benchmark::dc(fn () => ...)` when both a result and its duration are useful.
@@ -26,22 +26,23 @@ Send short-lived development dumps to the package listener with the smallest use
 
 ## References
 
-- `config/dump-to-console.php`
-- `README.md`
+- [Installation](https://atb.dev.br/docs/dump-to-console/installation)
+- [Listener setup and examples](https://atb.dev.br/docs/dump-to-console/usage)
 
 ## Examples
 
 ```php
-$order = dc(Order::findOrFail($id));
-
-dc(request: request()->all(), order: $order);
+$orderId = dc(42);
+$summary = dc(orderId: $orderId, itemCount: 3);
 ```
 
 ```php
 use Illuminate\Support\Benchmark;
 
-$report = Benchmark::dc(fn () => $service->generateReport());
+$total = Benchmark::dc(fn (): int => array_sum([10, 20, 30]));
 ```
+
+The listener receives the selected values and the timing. The calls return `42`, the named summary array, and `60` in the application.
 
 ## Anti-patterns
 

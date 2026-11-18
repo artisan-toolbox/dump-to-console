@@ -9,6 +9,8 @@
 
 ## [Unreleased]
 
+- Use selected synthetic values in the Boost skill and link to the published listener setup.
+
 ### Documentation
 
 - Update documentation links and managed README badges to `https://atb.dev.br`, and use `contact@atb.dev.br` for public package contact metadata.
