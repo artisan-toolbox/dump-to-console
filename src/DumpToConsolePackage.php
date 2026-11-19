@@ -20,10 +20,11 @@ class DumpToConsolePackage implements Versionable, WithReadmeHead
             ->withLogo(src: 'logo/dump-to-console-icon.svg', alt: '', width: 88)
             ->withTitle('Dump to Console')
             ->withDescription('Send Laravel dumps to a local console listener without interrupting the application.')
+            ->addBadge(Badge::releaseVersion('https://github.com/artisan-toolbox/dump-to-console/releases'))
             ->addBadge(Badge::make(
-                link: 'https://github.com/artisan-toolbox/dump-to-console/releases',
-                imgSrc: 'https://img.shields.io/github/v/release/artisan-toolbox/dump-to-console?label=Release&style=flat-square',
-                imgAlt: 'Release',
+                link: 'https://packagist.org/packages/artisan-toolbox/dump-to-console',
+                imgSrc: 'https://img.shields.io/badge/Packagist-F28D1A?style=flat-square&logo=packagist&logoColor=white',
+                imgAlt: 'Packagist',
             ))
             ->addBadge(Badge::make(
                 link: 'https://atb.dev.br/packages/dump-to-console/#requirements',

@@ -13,9 +13,10 @@ it('configures the package logo and badges for the managed README header', funct
         ->and($head->logo())->toBe(['src' => 'logo/dump-to-console-icon.svg', 'alt' => '', 'width' => 88])
         ->and(dirname(__DIR__, 2).'/logo/dump-to-console-icon.svg')->toBeFile()
         ->and(array_map(static fn (Badge $badge): array => [
-            $badge->imgAlt(), $badge->link(), $badge->imgSrc(),
+            $badge->imgAlt(), $badge->link(), $badge->imgSrc('1.2.3-beta.4'),
         ], $head->badges()))->toBe([
-            ['Release', 'https://github.com/artisan-toolbox/dump-to-console/releases', 'https://img.shields.io/github/v/release/artisan-toolbox/dump-to-console?label=Release&style=flat-square'],
+            ['version', 'https://github.com/artisan-toolbox/dump-to-console/releases', 'https://img.shields.io/badge/version-1.2.3--beta.4-blue?style=flat-square'],
+            ['Packagist', 'https://packagist.org/packages/artisan-toolbox/dump-to-console', 'https://img.shields.io/badge/Packagist-F28D1A?style=flat-square&logo=packagist&logoColor=white'],
             ['PHP', 'https://atb.dev.br/packages/dump-to-console/#requirements', 'https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square'],
             ['Laravel', 'https://atb.dev.br/packages/dump-to-console/#requirements', 'https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square'],
             ['Tests', 'https://github.com/artisan-toolbox/dump-to-console/actions/workflows/tests.yml?query=branch%3A1.x', 'https://img.shields.io/github/actions/workflow/status/artisan-toolbox/dump-to-console/tests.yml?branch=1.x&label=Tests&style=flat-square'],
