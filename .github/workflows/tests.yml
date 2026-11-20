@@ -6,53 +6,51 @@ on:
       - main
       - '*.x'
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'latest' || github.sha }}
   cancel-in-progress: true
 
 jobs:
   tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.5]
-        laravel: [13.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 13.*
-            testbench: 11.*
+          - os: ubuntu-latest
+            runner: ubuntu-24.04
+          - os: windows-latest
+            runner: windows-2025
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L13.* - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+      - name: Set up CI dependencies
+        uses: artisan-toolbox/maintainer@498f5f8723cbed3d24af0ba90870ca26010db4df # 1.14.2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, fileinfo, sqlite, pdo_sqlite, bcmath, intl
-          ini-values: error_reporting=E_ALL
-          tools: composer:v2
-          coverage: none
+          php-extensions: dom, curl, libxml, mbstring, zip, fileinfo, sqlite, pdo_sqlite, bcmath, intl
+          composer-mode: ${{ matrix.stability }}
+          composer-validation: no-check-lock
+          composer-scripts: 'false'
 
-      - name: Require a PHPStan version with the Turbo PHPDoc fix on Windows
-        if: runner.os == 'Windows'
-        run: composer require --dev "phpstan/phpstan:>=2.2.8 <3.0" --no-interaction --no-update
-
-      - name: Install dependencies
-        run: |
-          composer require "artisan-toolbox/core:1.x-dev" "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --no-scripts
-          composer run prepare
+      - name: Discover Testbench packages
+        run: composer run prepare
 
       - name: PHPStan
         run: composer analyse
@@ -70,4 +68,4 @@ jobs:
 
       - name: Test Suite (Windows)
         if: runner.os == 'Windows'
-        run: vendor/bin/pest
+        run: php vendor/bin/pest

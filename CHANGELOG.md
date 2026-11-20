@@ -19,6 +19,9 @@
 
 ## [Unreleased]
 
+- Use the Maintainer 1.14.2 root action to validate and install Composer dependencies in each CI matrix entry.
+- Require Larastan 3.12.1 or later in the 3.x series so Composer selects a PHPStan release with the Windows Turbo PHPDoc fix in every CI job.
+- Verify the complete Pest type-coverage report and test the declared Core range in the Ubuntu and Windows Composer matrix.
 - Use selected synthetic values in the Boost skill and link to the published listener setup.
 
 ### Documentation
