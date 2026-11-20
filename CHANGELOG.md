@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.2.1] - 2026-11-20
+
+### Documentation
+
+- **Update README badges and link to installation requirements** (`c9c64be`)
+  Replace the dynamic GitHub Release badge with a version badge that still links to GitHub releases, and add a badge linking directly to `artisan-toolbox/dump-to-console` on Packagist. The managed README header uses `Badge::releaseVersion()`, and tests verify both badge destinations and the Shields.io escaping for prerelease versions such as `1.2.3-beta.4`. The installation section now links to the requirements instead of repeating them inline. The Composer install command and the PHP ^8.5 and Laravel 13 badges are unchanged.
+
+### Continuous Integration
+
+- **Use Maintainer in CI and verify complete Pest type coverage** (`287f667`)
+  Run the PHP 8.5 test matrix on Ubuntu 24.04 and Windows Server 2025 using the Maintainer 1.14.2 action to validate and install Composer dependencies in both prefer-lowest and prefer-stable modes. CI tests the declared dependency ranges without overriding Core, Laravel, Testbench, or Windows PHPStan constraints. Composer validation skips lock-file checks, installation skips scripts, and Testbench discovery still runs explicitly through `composer run prepare`. Windows invokes Pest through PHP. The workflow supports manual runs, gives each matrix job a 20-minute timeout, lets sibling jobs finish after a failure, and does not persist checkout credentials. New runs cancel superseded runs for the same pull-request ref; other runs are grouped by event, ref, and commit SHA.
+
+The Composer constraints now require Maintainer ^1.14.3, Core ^1.4.1, and Larastan ^3.12.1 for development. Projects pinned below these minimums must update those dependencies to install this release. Larastan stays on the 3.x series, with the new minimum allowing Composer to select a PHPStan release that includes the Windows Turbo PHPDoc fix.
+
+`composer test:types` now uses a wrapper that forwards CLI arguments to Pest, enforces 100% type coverage with the cache disabled and a 512 MB memory limit, and verifies that Pest’s JSON report includes every PHP file under `src/` except `src/Concerns/Dumpable.php`, which Pest omits. The wrapper lists missing files on stderr, exits with status 1 on errors, and removes the temporary report. A regression test confirms that an incomplete report fails even when Pest succeeds and every reported file has 100% coverage.
+
+Adds project-level Maintainer configuration with independent, environment-overridable AI provider and model settings for commit messages, release type suggestions, release notes, and changelog updates. It defaults to `openai` and `gpt-6.2-sol` for each task, English for the project locale, no local feedback locale, line-by-line Git diff output, and `tests.yml` as the release workflow. It also configures fix tasks for Rector, Pint, and Vite+ and test tasks for Pest, Pint, Vite+, vue-tsc, and PHPStan. Pest parallelism defaults to off, and PHPStan’s memory limit defaults to 2 GB; both are configurable.
+
 ## [1.2.0] - 2026-11-18
 
 ### Documentation
