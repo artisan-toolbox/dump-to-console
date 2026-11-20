@@ -37,6 +37,10 @@ Adds project-level Maintainer configuration with independent, environment-overri
 
 ## [Unreleased]
 
+- Test PHP 8.5 and 8.6 in CI with the Maintainer 1.14.4 setup action.
+
+- Use Maintainer 1.14.3 for package quality checks. Keep the short Pest suite serial by default.
+
 - Use the Maintainer 1.14.2 root action to validate and install Composer dependencies in each CI matrix entry.
 - Require Larastan 3.12.1 or later in the 3.x series so Composer selects a PHPStan release with the Windows Turbo PHPDoc fix in every CI job.
 - Verify the complete Pest type-coverage report and test the declared Core range in the Ubuntu and Windows Composer matrix.
