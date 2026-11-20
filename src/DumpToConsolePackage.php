@@ -12,7 +12,7 @@ use ArtisanToolbox\Maintainer\Versionable\Readme\Head;
 /** @internal Provides release metadata without booting the Laravel service. */
 class DumpToConsolePackage implements Versionable, WithReadmeHead
 {
-    public const string VERSION = '1.2.1';
+    public const string VERSION = '1.2.2';
 
     public function readmeHead(): Head
     {

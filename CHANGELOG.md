@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.2] - 2026-11-20
+
+### Continuous Integration
+
+- **Test Dump to Console on PHP 8.6** (`a8c35cc`)
+  Adds PHP 8.6 alongside PHP 8.5 to the Ubuntu and Windows CI matrices for both `prefer-lowest` and `prefer-stable` dependency resolution. Updates the pinned `artisan-toolbox/maintainer` setup action from 1.14.2 to 1.14.4. CI now runs PHPStan and Pint through Maintainer's strict, non-interactive `quality:check` command and uses a separate invocation of the same command for Pest on both operating systems, replacing the previous OS-specific test commands. Type coverage remains disabled on Windows. The changelog documents the expanded CI coverage; package dependency constraints are unchanged.
+
+### Maintenance
+
+- **Consolidate quality checks and configure Pest workers** (`0e8e6e9`)
+  `composer test` now runs PHPStan, Pint, and Pest through Maintainer's strict, non-interactive `quality:check` command before running `test:types`, instead of calling `analyse`, `lint:check`, and `test:unit` directly. Adds `MAINTAINER_PEST_PROCESSES` as an integer worker-count setting with a default of 2. Parallel execution remains opt-in through `MAINTAINER_PEST_PARALLEL`, so the short Pest suite still runs serially by default. The changelog documents the package quality checks with Maintainer 1.14.3. The default fix pipeline drops the Vite Plus fix step, and the default test pipeline drops the Vite Plus check and test steps and the Vue TypeScript check. Workflows that depend on those steps must invoke them explicitly. Deletes `maintainer.json` without a replacement, removing the repository's OpenAI provider selections for commit messages, release-type suggestions, release notes, and changelog updates, as well as its `line_by_line` Git diff format and `2G` PHPStan memory limit. Workflows that depend on those settings must configure them separately.
+
 ## [1.2.1] - 2026-11-20
 
 ### Documentation
